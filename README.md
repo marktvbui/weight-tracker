@@ -1,1 +1,3 @@
 # weight-tracker
+
+this is a javascript/jquery app that includes boostrap, moment.js, firebase to track a persons weight lost through their diet journey. Inspiried by my own personal weight lost, what i was doing was tracking my weight lost by the notes app on my iphone, outdated, and plain to use, so i decided to make an app that will track my weight, tell me how much weight i've lost since my last weigh in. Will also allow users to sign in and create their own account and track their progress!

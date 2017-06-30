@@ -24,6 +24,11 @@ $(document).ready(function() {
         weight = $('.weight-input').val().trim();
         date = $('#datepicker').val().trim();
 
+        var numberRegex = /^\d+$/;
+        if (!numberRegex.test(weight)) {
+          alert('weight needs to be numbers only!');
+          return false;
+        }
         if ((weight === '') || (date === '')) {
             alert('Please fill out all input fields.');
             return false;
@@ -33,7 +38,6 @@ $(document).ready(function() {
         previousData.on('child_added', function(event){
             var previousWeight = event.val();
             weightLost = (previousWeight.weight - weight).toFixed(2);
-            console.log(weightLost);
         });
 
         currentWeight = {

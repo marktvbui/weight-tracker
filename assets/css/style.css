@@ -1,0 +1,39 @@
+body {
+  font-family: 'Merienda', cursive;
+}
+.weight-input {
+  width: 10%;
+}
+#datepicker {
+    z-index: 1;
+    display: block;
+}
+.brand-image {
+    max-height: 65px;
+    max-width: 65px;
+}
+h3 {
+    text-align: center;
+}
+#weight-table {
+    table-layout: fixed;
+}
+.well-weight {
+    background-color: #33ECFF;
+}
+td {
+    text-align: center;
+}
+th {
+    text-align: center;
+}
+.navbar {
+    background-color: #33ECFF;
+}
+.main-input {
+    background-color: #33ECFF;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}

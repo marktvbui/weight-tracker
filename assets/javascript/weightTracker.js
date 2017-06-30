@@ -26,11 +26,9 @@ $(document).ready(function() {
 
         var numberRegex = /^\d+$/;
         if (!numberRegex.test(weight)) {
-          alert('weight needs to be numbers only!');
           return false;
         }
         if ((weight === '') || (date === '')) {
-            alert('Please fill out all input fields.');
             return false;
         }
 
@@ -63,6 +61,18 @@ $(document).ready(function() {
 	        console.log('read failed: ' + errorObject);
 	        })
     }
+      function alertModal(input) {
+        // setting modal to hidden status
+        $('[data-modal-option]').hide();
+        // passes through the input to correctly pick the right modal
+        $('.modal-' + input).show();
+        // shows the correct modal
+        $('#myModal').show();
+        // sets the x button to close the modal, and closes the modal
+        $('#myModal .close').on('click', function() {
+          $('#myModal').hide();
+        })
+      };
 
     DisplayWeightLost();
 });

@@ -48,6 +48,7 @@ $(document).ready(function() {
     $('.weight-input').val('');
     $('#datepicker').val('');
   })
+
   function DisplayWeightLost() {
     database.ref('weightStatus').on('child_added', function(snapshot) {
       var weightStatus = snapshot.val();
@@ -55,7 +56,7 @@ $(document).ready(function() {
       row.append($('<td>').html(weightStatus.date));
       row.append($('<td>').html(weightStatus.weight));
       row.append($('<td>').html(weightStatus.lost));
-      row.append($('<td><a href="#">delete</a></td>'));
+      row.append($('<td><a href="#">&times;</a></td>'));
       $('#weight-table').append(row);
     }, function(errorObject) {
       console.log('read failed: ' + errorObject);

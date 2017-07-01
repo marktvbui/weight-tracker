@@ -76,3 +76,7 @@ th {
     text-decoration: none;
     cursor: pointer;
 }
+
+.weightTable {
+    min-height: 500px;
+}

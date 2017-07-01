@@ -29,20 +29,26 @@ $(document).ready(function() {
     weight = $('.weight-input').val().trim();
     date = $('#datepicker').val().trim();
     // number check, making sure weight was entered as numbers only
-    var numberRegex = /^\d+$/;
+    var numberRegex = /^\d*\.?\d*$/;
     if (!numberRegex.test(weight)) {
+      alertModal('number-input');
       return false;
     }
     // making sure both weight and date fields are entered
     if ((weight === '') || (date === '')) {
+      alertModal('date-input');
       return false;
     }
     // grabbing the most recent child, comparing previous weight to current weight to get weight lost amount
     var previousData = database.ref('weightStatus').limitToLast(1);
-    previousData.on('child_added', function(event) {
-      var previousWeight = event.val();
-      weightLost = (previousWeight.weight - weight).toFixed(2);
-    });
+    if (!previousData) {
+      weightLost = 0;
+    } else {
+      previousData.on('child_added', function(event) {
+        var previousWeight = event.val();
+        weightLost = (previousWeight.weight - weight).toFixed(2);
+      })
+    };
     // setting object (firebase only accepts objects)
     currentWeight = {
       weight: weight,
@@ -67,6 +73,7 @@ $(document).ready(function() {
       row.append($('<td>').html(weightStatus.weight));
       row.append($('<td>').html(weightStatus.lost));
       row.append($('<td><a href="#">&times;</a></td>'));
+      row.attr(weightStatus.weight);
       // appending row items to the table
       $('#weight-table').append(row);
     }, function(errorObject) {
@@ -91,6 +98,10 @@ $(document).ready(function() {
   $(function(){
     $('table').on('click','tr a',function(e){
        e.preventDefault();
+       var test = database.ref('weightStatus').on('child_added', function(snapshot) {
+        var test1 = snapshot.val();
+        console.log(test1.id);
+       });
       $(this).parents('tr').remove();
     });
   });

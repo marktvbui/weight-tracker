@@ -1,12 +1,14 @@
 body {
   font-family: 'Merienda', cursive;
+  background-size: cover;
+  min-width: 100%;
+  min-height: 100%;
 }
 .weight-input {
   width: 10%;
 }
 #datepicker {
     z-index: 1;
-    display: block;
 }
 .brand-image {
     max-height: 65px;
@@ -55,11 +57,12 @@ th {
 /* Modal Content/Box */
 .numberModal-content,
 .modal-content {
-    background-color: #fefefe ;
+    background-color: #00FF00;
     margin: 15% auto; /* 15% from the top and centered */
     padding: 20px;
     border: 1px solid #888;
     width: 80%; /* Could be more or less, depending on screen size */
+    font-size: 20px;
 }
 
 /* The Close Button */
@@ -78,5 +81,5 @@ th {
 }
 
 .weightTable {
-    min-height: 500px;
+    min-height: 450px;
 }

@@ -41,9 +41,11 @@ $(document).ready(function() {
     }
     // grabbing the most recent child, comparing previous weight to current weight to get weight lost amount
     var previousData = database.ref('weightStatus').limitToLast(1);
+    // if statement needed to prevent app from breaking on initial weight entry
     if (!previousData) {
       weightLost = 0;
     } else {
+      // simple function to grab previous child's weight, to calculate weight lost
       previousData.on('child_added', function(event) {
         var previousWeight = event.val();
         weightLost = (previousWeight.weight - weight).toFixed(2);
@@ -98,10 +100,8 @@ $(document).ready(function() {
   $(function(){
     $('table').on('click','tr a',function(e){
        e.preventDefault();
-       var test = database.ref('weightStatus').on('child_added', function(snapshot) {
-        var test1 = snapshot.val();
-        console.log(test1.id);
-       });
+       var test = database.ref('weightStatus');
+       console.log(test);
       $(this).parents('tr').remove();
     });
   });

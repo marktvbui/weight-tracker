@@ -70,13 +70,13 @@ $(document).ready(function() {
       // sets weightStatus variable to current child added to firebase
       var weightStatus = snapshot.val();
       var key = snapshot.key;
+      console.log(key);
       // setting up table tr, td elements
       var row = $('<tr>');
       row.append($('<td>').html(weightStatus.date));
       row.append($('<td>').html(weightStatus.weight));
       row.append($('<td>').html(weightStatus.lost));
-      row.append($('<td data-key="' + key + '"><a href="#">&times;</a></td>'));
-      console.log(row);
+      row.append($('<td><a data-key="'+ key + '">&times;</a></td>'));
       // appending row items to the table
       $('#weight-table').append(row);
     }, function(errorObject) {
@@ -97,24 +97,17 @@ $(document).ready(function() {
     })
   };
 
-  // this function currently removes the element from the page, working on removing from the database
-  var remove = function(e){
+  // onclick event on my table, targetting the a tag (x)
+  $('table').on('click','tr a',function(e){
     e.preventDefault();
-    var key = $(this).data('key');
-    console.log($(this).data('key'));
-    database.ref('weightStatus').child(key).remove();
-  }
+    // referring to the database, of 'this' child, targetting the data-key, and removing it
+    database.ref('weightStatus').child($(this).attr('data-key')).remove();
+    // removes the deleted element from the screen
+    $(this).parents('tr').remove();
+    // sends an alert
+    alertModal('removed-item');
+  });
 
-$('table').on('click', 'tr a', remove);
-
-  // $(function(){
-  //   $('table').on('click','tr a',function(e){
-  //      e.preventDefault();
-  //      var test = database.ref('weightStatus');
-  //      test.child(test.key).remove();
-  //     $(this).parents('tr').remove();
-  //   });
-  // });
-  // calling function to always display weight lost table
+    // calling function to always display weight lost table
   DisplayWeightLost();
 });

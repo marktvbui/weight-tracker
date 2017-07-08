@@ -27,8 +27,7 @@
         <!--<a class="navbar-brand" href=""></a>-->
       </div>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="">Sign In</a></li>
-        <li><a href="">Sign Up</a></li>
+        <li><a href="">Log Out</a></li>
       </ul>
     </div>
     <!-- /.container-fluid -->
@@ -65,7 +64,6 @@
       </div>
     </div>
     <div id="myModal" class="modal">
-
       <!-- Modal content -->
       <div class="modal-content">
         <span class="close">&times;</span>
@@ -78,6 +76,17 @@
         <p class="modal-removed-item" data-modal-option>
           <strong>Item has been removed</strong>
         </p>
+      </div>
+    </div>
+    <div id="signUp" class="modalSignin">
+      <div class="modal-content">
+        <div id="signupForm">
+          <label for="email">Email</label>
+          <input class="input email" type="text" id="email"><br>
+          <label for="password">Password</label>
+          <input class="input password" type="text" id="password"><br>
+          <button type="submit" class="btn btn-success btn-group-sm" value="Submit" id="submit-User">Submit</button>
+        </div>
       </div>
     </div>
   </main>

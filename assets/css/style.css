@@ -31,6 +31,7 @@ th {
 }
 .navbar {
     background-color: #33ECFF;
+    background: linear-gradient(to right, yellow , #00ff24);
 }
 .main-input {
     background-color: #33ECFF;
@@ -53,7 +54,18 @@ th {
     background-color: rgb(0,0,0); 
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
+.modalSignin {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    width: 75%;
+    height: 75%;
+    overflow: auto;
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 
+}
 /* Modal Content/Box */
 .numberModal-content,
 .modal-content {
@@ -63,6 +75,14 @@ th {
     border: 1px solid #888;
     width: 80%; /* Could be more or less, depending on screen size */
     font-size: 20px;
+}
+.modalSignin {
+    background-color: #00FF00;
+    margin: auto;
+    padding: 25px;
+    border: 1px solid;
+    width: 75;
+    font-size: 25px;
 }
 
 /* The Close Button */
@@ -82,4 +102,13 @@ th {
 
 .weightTable {
     min-height: 450px;
+}
+#form {
+    text-align: center;
+}
+.main-input {
+    background: radial-gradient(red, yellow, #00ff24);
+}
+.container-weight {
+    background: linear-gradient(to right, #00ff24 , yellow);
 }

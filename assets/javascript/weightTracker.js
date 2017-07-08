@@ -15,6 +15,8 @@ $(document).ready(function() {
   var weight = '';
   var date = '';
   var weightLost = '';
+  var email = '';
+  var password= '';
 
   // function to display the calendar
   $(function() {
@@ -70,7 +72,6 @@ $(document).ready(function() {
       // sets weightStatus variable to current child added to firebase
       var weightStatus = snapshot.val();
       var key = snapshot.key;
-      console.log(key);
       // setting up table tr, td elements
       var row = $('<tr>');
       row.append($('<td>').html(weightStatus.date));
@@ -83,6 +84,17 @@ $(document).ready(function() {
       console.log('read failed: ' + errorObject);
     })
   }
+
+  // onclick event on my table, targetting the a tag (x)
+  $('table').on('click','a',function(e){
+    e.preventDefault();
+    // referring to the database, of 'this' child, targetting the data-key, and removing it
+    database.ref('weightStatus').child($(this).attr('data-key')).remove();
+    // removes the deleted element from the screen
+    $(this).parents('tr').remove();
+    // sends an alert
+    alertModal('removed-item');
+  });
 
   function alertModal(input) {
     // setting modal to hidden status
@@ -97,17 +109,29 @@ $(document).ready(function() {
     })
   };
 
-  // onclick event on my table, targetting the a tag (x)
-  $('table').on('click','tr a',function(e){
-    e.preventDefault();
-    // referring to the database, of 'this' child, targetting the data-key, and removing it
-    database.ref('weightStatus').child($(this).attr('data-key')).remove();
-    // removes the deleted element from the screen
-    $(this).parents('tr').remove();
-    // sends an alert
-    alertModal('removed-item');
-  });
-
-    // calling function to always display weight lost table
+  // User = person => (
+  //   $('.modalSignin').show(),
+  //   email = $('#email').val().trim(),
+  //   password = $('#password').val().trim(),
+  //   user = {
+  //     email: email,
+  //     password: password
+  //   },
+  //   database.ref('user').push(user),
+  //   firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+  //     // Handle Errors here.
+  //     var errorCode = error.code;
+  //     var errorMessage = error.message;
+  //     // ...
+  //   }),
+  //   $('#email').val(''),
+  //   $('#passowrd').val('')
+  // )
+  // email = $('#email').val();
+  // password = $('#password').val();
+  //   // calling function to always display weight lost table
+  // User();
+  // var userTrue = ( !user ? DisplayWeightLost().hide() : DisplayWeightLost() );
   DisplayWeightLost();
+
 });

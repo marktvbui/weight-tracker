@@ -57,16 +57,21 @@ th {
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 .modalSignin {
-  position: fixed;
   z-index: 1;
-  top: 25%;
-  margin: auto;
-  left: 40%;
   overflow: auto;
-  background-color: rgb(0,0,0);
-/* Black w/ opacity */
-  background-color: rgba(0,0,0,0.4);
+  position: absolute;
+    margin: auto;
+    top: 20%;
+    right: 20%;
+    left: 20%;
   text-align: center;
+  background: -webkit-linear-gradient(left, #CC99CC, #944397, #CC99CC);
+  background: -o-linear-gradient(right, #CC99CC, #944397, #CC99CC);
+  background: -moz-linear-gradient(right, #CC99CC, #944397, #CC99CC);
+  background: linear-gradient(to right, #CC99CC, #944397, #CC99CC);
+  padding: 30px;
+  border: 1px solid;
+  font-size: 16px;
 }
 /* Modal Content/Box */
 .numberModal-content,
@@ -76,15 +81,6 @@ th {
   padding: 20px;
   border: 1px solid #888;
   width: 80%; /* Could be more or less, depending on screen size */
-  font-size: 16px;
-}
-.signinModal {
-  background: -webkit-linear-gradient(left, #944397, #CC99CC, #944397);
-  background: -o-linear-gradient(right, #944397, #CC99CC, #944397);
-  background: -moz-linear-gradient(right, #944397, #CC99CC, #944397);
-  background: linear-gradient(to right, #944397, #CC99CC, #944397);
-  padding: 30px;
-  border: 1px solid;
   font-size: 16px;
 }
 
@@ -125,7 +121,7 @@ th {
   background-color: #944397;
 }
 #submit-User, #registerUser {
-  background-color: #944397;
+  background-color: #CC99CC;
   vertical-align: middle;
   margin-top: 15px;
 }

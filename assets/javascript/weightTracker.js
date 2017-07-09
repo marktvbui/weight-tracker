@@ -117,6 +117,7 @@ $(document).ready(function() {
     var promise = auth.signInWithEmailAndPassword(email, password);
     promise.catch(e => console.log(e, message));
     $('.modalSignin').hide();
+    alertModal('welcome-back');
     DisplayWeightLost();
   })
 
@@ -125,12 +126,13 @@ $(document).ready(function() {
     var email = $('#email').val().trim();
     var password = $('#password').val().trim();
     var auth = firebase.auth();
-    var promise = auth.createUserEmailAndPassword(email, password);
+    var promise = auth.createUserWithEmailAndPassword(email, password);
     promise.catch(e => console.log(e, message));
   });
 
   $('.logOut').on('click', function(events) {
     firebase.auth().signOut();
+    alertModal('logged-out');
   })
 
   firebase.auth().onAuthStateChange(firebaseUser => {

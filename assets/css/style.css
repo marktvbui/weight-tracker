@@ -57,16 +57,18 @@ th {
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 .modalSignin {
-  display: none;
   position: fixed;
   z-index: 1;
-  top: 0;
-  width: 75%;
-  height: 75%;
+  top: 25%;
+  margin: auto;
+  left: 25%;
+  width: 50%;
+  height: 50%;
   overflow: auto;
   background-color: rgb(0,0,0);
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-
+/* Black w/ opacity */
+  background-color: rgba(0,0,0,0.4);
+  text-align: center;
 }
 /* Modal Content/Box */
 .numberModal-content,
@@ -76,15 +78,13 @@ th {
   padding: 20px;
   border: 1px solid #888;
   width: 80%; /* Could be more or less, depending on screen size */
-  font-size: 20px;
+  font-size: 16px;
 }
-.modalSignin {
-  background-color: #00FF00;
-  margin: auto;
-  padding: 25px;
-  border: 1px solid;
-  width: 75;
-  font-size: 25px;
+.signinModal {
+  background: -webkit-linear-gradient(left, #944397, #CC99CC, #944397);
+  background: -o-linear-gradient(right, #944397, #CC99CC, #944397);
+  background: -moz-linear-gradient(right, #944397, #CC99CC, #944397);
+  background: linear-gradient(to right, #944397, #CC99CC, #944397);
 }
 
 /* The Close Button */
@@ -122,6 +122,12 @@ th {
 }
 #submit-Info {
   background-color: #944397;
+}
+#submit-User {
+  background-color: #944397;
+}
+#registerUser{
+  background-color: #CC99CC;
 }
 .logOut {
   font-weight: bolder;

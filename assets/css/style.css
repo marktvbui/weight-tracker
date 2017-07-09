@@ -8,26 +8,26 @@ label {
   width: 15%;
 }
 #datepicker {
-    z-index: 1;
+  z-index: 1;
 }
 .brand-image {
-    max-height: 65px;
-    max-width: 65px;
+  max-height: 65px;
+  max-width: 65px;
 }
 h3 {
-    text-align: center;
+  text-align: center;
 }
 #weight-table {
-    table-layout: fixed;
+  table-layout: fixed;
 }
 .container-weight {
-    background-color: #33ECFF;
+  background-color: #33ECFF;
 }
 td {
-    text-align: center;
+  text-align: center;
 }
 th {
-    text-align: center;
+  text-align: center;
 }
 .navbar {
   background: -webkit-linear-gradient(left, #944397, #CC99CC, #944397);
@@ -36,77 +36,77 @@ th {
   background: linear-gradient(to right, #944397, #CC99CC, #944397);
 }
 .main-input {
-    background-color: #33ECFF;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+  background-color: #33ECFF;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 /* The Modal (background) */
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); 
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 .modalSignin {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    width: 75%;
-    height: 75%;
-    overflow: auto;
-    background-color: rgb(0,0,0); 
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  display: none;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  width: 75%;
+  height: 75%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 
 }
 /* Modal Content/Box */
 .numberModal-content,
 .modal-content {
-    background-color: #00FF00;
-    margin: 15% auto; /* 15% from the top and centered */
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
-    font-size: 20px;
+  background-color: #00FF00;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+  font-size: 20px;
 }
 .modalSignin {
-    background-color: #00FF00;
-    margin: auto;
-    padding: 25px;
-    border: 1px solid;
-    width: 75;
-    font-size: 25px;
+  background-color: #00FF00;
+  margin: auto;
+  padding: 25px;
+  border: 1px solid;
+  width: 75;
+  font-size: 25px;
 }
 
 /* The Close Button */
 .close {
-    color: #000000;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+  color: #000000;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
 }
 
 .close:hover,
 .close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .weightTable {
-    min-height: 450px;
+  min-height: 450px;
 }
 #form {
-    text-align: center;
+  text-align: center;
 }
 .main-input {
   background: -webkit-linear-gradient(left, #944397, #CC99CC, #944397);
@@ -121,9 +121,9 @@ th {
   background: linear-gradient(to right, #944397, #CC99CC, #944397);
 }
 #submit-Info {
-    background-color: #944397;
+  background-color: #944397;
 }
 .logOut {
-    font-weight: bolder;
-    color: black;
+  font-weight: bolder;
+  color: black;
 }

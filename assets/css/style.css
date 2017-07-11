@@ -58,12 +58,13 @@ th {
 }
 .modalSignin {
   z-index: 1;
-  overflow: auto;
+/*  display: none;
+*/  overflow: auto;
   position: absolute;
-    margin: auto;
-    top: 20%;
-    right: 20%;
-    left: 20%;
+  margin: auto;
+  top: 20%;
+  right: 20%;
+  left: 20%;
   text-align: center;
   background: -webkit-linear-gradient(left, #CC99CC, #944397, #CC99CC);
   background: -o-linear-gradient(right, #CC99CC, #944397, #CC99CC);
@@ -76,12 +77,14 @@ th {
 /* Modal Content/Box */
 .numberModal-content,
 .modal-content {
-  background-color: #00FF00;
+  background-color: #e066ff;
  /* 15% from the top and centered */
   padding: 20px;
   border: 1px solid #888;
   width: 80%; /* Could be more or less, depending on screen size */
   font-size: 16px;
+  margin: auto;
+  text-align: center;
 }
 
 /* The Close Button */

@@ -16,8 +16,8 @@ $(document).ready(function() {
   var date = '';
   var weightLost = '';
   var email = '';
-  var password= '';
-
+  var password = '';
+  var userid = '';
   // function to display the calendar
   $(function() {
     $('#datepicker').datepicker();
@@ -41,8 +41,10 @@ $(document).ready(function() {
       alertModal('date-input');
       return false;
     }
+    // var userid = firebase.auth().currentUser.uid;
     // grabbing the most recent child, comparing previous weight to current weight to get weight lost amount
-    var previousData = database.ref('user/weightStatus').limitToLast(1);
+    userid = firebase.auth().currentUser.uid;
+    var previousData = database.ref('user/' + userid + '/weightStatus').limitToLast(1);
     // if statement needed to prevent app from breaking on initial weight entry
     if (!previousData) {
       weightLost = 0;
@@ -60,15 +62,17 @@ $(document).ready(function() {
       lost: weightLost
     }
     // pushing the currentWeight object into the database
-    database.ref('user/weightStatus').push(currentWeight);
+    database.ref('user/' + userid + '/weightStatus').push(currentWeight);
+    // DisplayWeightLost(userid);
     // clears the input values after submit
     $('.weight-input').val('');
     $('#datepicker').val('');
-  })
+  });
 
-  function DisplayWeightLost() {
+  function DisplayWeightLost(userid) {
+    console.log(userid);
     // accessing the database, each time a new element is added, function will automatically run
-    database.ref('user/weightStatus').on('child_added', function(snapshot) {
+    database.ref('user/' + userid + '/weightStatus').on('child_added', function(snapshot) {
       // sets weightStatus variable to current child added to firebase
       var weightStatus = snapshot.val();
       var key = snapshot.key;
@@ -83,13 +87,13 @@ $(document).ready(function() {
     }, function(errorObject) {
       console.log('read failed: ' + errorObject);
     })
-  }
+  };
 
   // onclick event on my table, targetting the a tag (x)
   $('table').on('click','a',function(e){
     e.preventDefault();
     // referring to the database, of 'this' child, targetting the data-key, and removing it
-    database.ref('user/weightStatus').child($(this).attr('data-key')).remove();
+    database.ref('user/' + userid + '/weightStatus').child($(this).attr('data-key')).remove();
     // removes the deleted element from the screen
     $(this).parents('tr').remove();
     // sends an alert
@@ -119,28 +123,45 @@ $(document).ready(function() {
     $('.modalSignin').hide();
     alertModal('welcome-back');
     DisplayWeightLost();
-  })
+  });
 
   $('#registerUser').on('click', events => {
     events.preventDefault();
-    var email = $('#email').val().trim();
-    var password = $('#password').val().trim();
+    email = $('#email').val().trim();
+    password = $('#password').val().trim();
     var auth = firebase.auth();
     var promise = auth.createUserWithEmailAndPassword(email, password);
     promise.catch(e => console.log(e, message));
+    $('.modalSignin').hide();
+    // DisplayWeightLost();
+    alertModal('signed-up');
+  });
+
+  $('.LogIn').on('click', event => {
+    $('.modalSignin').show();
   });
 
   $('.logOut').on('click', function(events) {
     firebase.auth().signOut();
     alertModal('logged-out');
-  })
+  });
 
-  firebase.auth().onAuthStateChange(firebaseUser => {
+  firebase.auth().onAuthStateChanged(firebaseUser => {
     if(firebaseUser) {
       console.log(firebaseUser);
     } else {
       console.log('not logged in');
     }
-  })
+  });
 
+  // function saveUser() {
+  //   userid = firebase.auth().currentUser.uid;
+  //   console.log(userid);
+  //   var user = {
+  //     email: email,
+  //     password: password,
+  //     uid: userid
+  //   }
+  //   database.ref('user').update(user);
+  // }
 });

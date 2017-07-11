@@ -42,8 +42,8 @@ $(document).ready(function() {
       return false;
     }
     // var userid = firebase.auth().currentUser.uid;
-    // grabbing the most recent child, comparing previous weight to current weight to get weight lost amount
     userid = firebase.auth().currentUser.uid;
+    // grabbing the most recent child, comparing previous weight to current weight to get weight lost amount
     var previousData = database.ref('user/' + userid + '/weightStatus').limitToLast(1);
     // if statement needed to prevent app from breaking on initial weight entry
     if (!previousData) {
@@ -63,10 +63,63 @@ $(document).ready(function() {
     }
     // pushing the currentWeight object into the database
     database.ref('user/' + userid + '/weightStatus').push(currentWeight);
-    // DisplayWeightLost(userid);
+    DisplayWeightLost(userid);
     // clears the input values after submit
     $('.weight-input').val('');
     $('#datepicker').val('');
+  });
+
+  // onclick event on my table, targetting the a tag (x)
+  $('table').on('click','a',function(e){
+    e.preventDefault();
+    // referring to the database, of 'this' child, targetting the data-key, and removing it
+    database.ref('user/' + userid + '/weightStatus').child($(this).attr('data-key')).remove();
+    // removes the deleted element from the screen
+    $(this).parents('tr').remove();
+    // sends an alert
+    alertModal('removed-item');
+  });
+
+  $('#submit-User').on('click', events => {
+    events.preventDefault();
+    var email = $('#email').val().trim();
+    var password = $('#password').val().trim();
+    var auth = firebase.auth();
+    var promise = auth.signInWithEmailAndPassword(email, password);
+    promise.catch(e => console.log(e, message));
+    $('.modalSignin').hide();
+    alertModal('welcome-back');
+    $('.navbar-right').show();
+    DisplayWeightLost();
+  });
+
+  $('#registerUser').on('click', events => {
+    events.preventDefault();
+    email = $('#email').val().trim();
+    password = $('#password').val().trim();
+    var auth = firebase.auth();
+    var promise = auth.createUserWithEmailAndPassword(email, password);
+    promise.catch(e => console.log(e, message));
+    $('.modalSignin').hide();
+    // DisplayWeightLost();
+    alertModal('signed-up');
+  });
+
+  // $('.LogIn').on('click', event => {
+  //   $('.modalSignin').show();
+  // });
+
+  $('.logOut').on('click', function(events) {
+    firebase.auth().signOut();
+    alertModal('logged-out');
+  });
+
+  firebase.auth().onAuthStateChanged(firebaseUser => {
+    if(firebaseUser) {
+      console.log(firebaseUser);
+    } else {
+      console.log('not logged in');
+    }
   });
 
   function DisplayWeightLost(userid) {
@@ -89,17 +142,6 @@ $(document).ready(function() {
     })
   };
 
-  // onclick event on my table, targetting the a tag (x)
-  $('table').on('click','a',function(e){
-    e.preventDefault();
-    // referring to the database, of 'this' child, targetting the data-key, and removing it
-    database.ref('user/' + userid + '/weightStatus').child($(this).attr('data-key')).remove();
-    // removes the deleted element from the screen
-    $(this).parents('tr').remove();
-    // sends an alert
-    alertModal('removed-item');
-  });
-
   function alertModal(input) {
     // setting modal to hidden status
     $('[data-modal-option]').hide();
@@ -112,48 +154,6 @@ $(document).ready(function() {
       $('#myModal').hide();
     })
   };
-
-  $('#submit-User').on('click', events => {
-    events.preventDefault();
-    var email = $('#email').val().trim();
-    var password = $('#password').val().trim();
-    var auth = firebase.auth();
-    var promise = auth.signInWithEmailAndPassword(email, password);
-    promise.catch(e => console.log(e, message));
-    $('.modalSignin').hide();
-    alertModal('welcome-back');
-    DisplayWeightLost();
-  });
-
-  $('#registerUser').on('click', events => {
-    events.preventDefault();
-    email = $('#email').val().trim();
-    password = $('#password').val().trim();
-    var auth = firebase.auth();
-    var promise = auth.createUserWithEmailAndPassword(email, password);
-    promise.catch(e => console.log(e, message));
-    $('.modalSignin').hide();
-    // DisplayWeightLost();
-    alertModal('signed-up');
-  });
-
-  $('.LogIn').on('click', event => {
-    $('.modalSignin').show();
-  });
-
-  $('.logOut').on('click', function(events) {
-    firebase.auth().signOut();
-    alertModal('logged-out');
-  });
-
-  firebase.auth().onAuthStateChanged(firebaseUser => {
-    if(firebaseUser) {
-      console.log(firebaseUser);
-    } else {
-      console.log('not logged in');
-    }
-  });
-
   // function saveUser() {
   //   userid = firebase.auth().currentUser.uid;
   //   console.log(userid);

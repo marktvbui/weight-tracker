@@ -128,7 +128,8 @@ th {
   vertical-align: middle;
   margin-top: 15px;
 }
-.logOut {
+.logOut, .navbar-right {
   font-weight: bolder;
   color: black;
+  display: none;
 }

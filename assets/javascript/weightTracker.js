@@ -42,7 +42,7 @@ $(document).ready(function() {
       return false;
     }
     userid = firebase.auth().currentUser.uid;
-    console.log(userid);
+    // console.log(userid);
     // grabbing the most recent child, comparing previous weight to current weight to get weight lost amount
     var previousData = database.ref(userid).child('user').child('weight').limitToLast(1);
     // if statement needed to prevent app from breaking on initial weight entry
@@ -109,8 +109,9 @@ $(document).ready(function() {
 
   firebase.auth().onAuthStateChanged(firebaseUser => {
     if(firebaseUser) {
-      console.log(firebaseUser);
+      // console.log(firebaseUser);
       DisplayWeightLost();
+      $('.logOut').show();
     } else {
       console.log('not logged in');
     }
@@ -133,64 +134,35 @@ $(document).ready(function() {
     var userName = $('#userName').val().trim();
     var email = $('#signUpEmail').val().trim();
     var targetWeight = $('#targetWeight').val().trim();
-    var password = $('#password').val().trim();
-    console.log(userName);
-    console.log(email);
-    console.log(targetWeight);
-    console.log(password);
-    // firebase.auth().createUserWithEmailAndPassword(email, password).then(function(user) {
-    //   var user = firebase.auth().currentUser;
-    //   console.log(user);
-    //   saveUser(user); // Optional
-    // }, function(error) {
-    // // Handle Errors here.
-    //   var errorCode = error.code;
-    //   var errorMessage = error.message;
-    // });
+    var password = $('#signUpPass').val().trim();
+    // var tempUserName;
+    // localStorage.setItem(tempUserName, userName);
+    // var temptargetWeight;
+    // localStorage.setItem(temptargetWeight, targetWeight);
     firebase.auth().createUserWithEmailAndPassword(email, password).then(function(user){
       console.log('user is authenticated, saving to database now...');
       // var user = firebase.auth().currentUser;
       console.log(user);
-      saveUser(user);
+      saveUser(userName, email, targetWeight, password);
       }, function(error) {
         var errorCode = error.code;
         var errorMessage = error.message;
         console.log('warning, error: ' + errorCode + '. ' + errorMessage);
       });
+    $('.modalRegister').hide();
+    DisplayWeightLost();
+    $('.logOut').show();
 
-    // firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
-    //  console.log(error.code);
-    //  console.log(error.message);
-    // });
-    //   userid = firebase.auth().currentUser.uid;
-    //   firebase.ref(userid).child('user').set({
-    //     username: userName,
-    //     password: password,
-    //     email: email,
-    //     uid: userid,
-    //     targetWeight: targetWeight
-    //   })
-    // });
-    // userid = firebase.auth().currentUser.uid;
-    // console.log(userid);
-    // var user = {
-    //   email: email,
-    //   password: password,
-    //   uid: userid
-    // }
-    // database.ref('user').update(user);
-    // .child for firebase
-    // localStorage.setitem
   });
 
-  function saveUser(user){
+  function saveUser(userName, email, targetWeight, password){
+    var user = firebase.auth().currentUser;
     var userNode = database.ref(user.uid).child('user');
     var createduser = {
-      username: this.userName,
-      password: this.password,
-      email: this.email,
-      uid: this.uid,
-      targetWeight: this.targetWeight
+      userName: userName,
+      email: email,
+      targetWeight: targetWeight,
+      password: password
     };
     console.log(createduser);
     userNode.push(createduser);
@@ -199,7 +171,7 @@ $(document).ready(function() {
 
   function DisplayWeightLost() {
     userid = firebase.auth().currentUser.uid;
-    console.log(userid);
+    // console.log(userid);
     // accessing the database, each time a new element is added, function will automatically run
     database.ref(userid).child('user').child('weight').on('child_added', function(snapshot) {
       // sets weightStatus variable to current child added to firebase

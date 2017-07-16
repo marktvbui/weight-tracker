@@ -66,7 +66,6 @@ $(document).ready(function() {
     if (user) {
       database.ref(userid).child('user').child('weight').push(currentWeight);
     }
-    console.log(user);
     // clears the input values after submit
     $('.weight-input').val('');
     $('#datepicker').val('');
@@ -111,7 +110,6 @@ $(document).ready(function() {
     if(firebaseUser) {
       // console.log(firebaseUser);
       DisplayWeightLost();
-      $('.logOut').show();
     } else {
       console.log('not logged in');
     }
@@ -142,7 +140,7 @@ $(document).ready(function() {
     firebase.auth().createUserWithEmailAndPassword(email, password).then(function(user){
       console.log('user is authenticated, saving to database now...');
       // var user = firebase.auth().currentUser;
-      console.log(user);
+      // console.log(user);
       saveUser(userName, email, targetWeight, password);
       }, function(error) {
         var errorCode = error.code;
@@ -151,8 +149,6 @@ $(document).ready(function() {
       });
     $('.modalRegister').hide();
     DisplayWeightLost();
-    $('.logOut').show();
-
   });
 
   function saveUser(userName, email, targetWeight, password){
@@ -171,7 +167,6 @@ $(document).ready(function() {
 
   function DisplayWeightLost() {
     userid = firebase.auth().currentUser.uid;
-    // console.log(userid);
     // accessing the database, each time a new element is added, function will automatically run
     database.ref(userid).child('user').child('weight').on('child_added', function(snapshot) {
       // sets weightStatus variable to current child added to firebase

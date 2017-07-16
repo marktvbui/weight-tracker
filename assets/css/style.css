@@ -134,7 +134,6 @@ th {
 .logOut, .navbar-right {
   font-weight: bolder;
   color: black;
-  display: none;
 }
 #submitRegistration {
   margin: 10px;

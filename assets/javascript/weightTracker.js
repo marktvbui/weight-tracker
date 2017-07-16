@@ -41,10 +41,10 @@ $(document).ready(function() {
       alertModal('date-input');
       return false;
     }
-    // var userid = firebase.auth().currentUser.uid;
     userid = firebase.auth().currentUser.uid;
+    console.log(userid);
     // grabbing the most recent child, comparing previous weight to current weight to get weight lost amount
-    var previousData = database.ref('user/' + userid + '/weightStatus').limitToLast(1);
+    var previousData = database.ref(userid).child('user').child('weight').limitToLast(1);
     // if statement needed to prevent app from breaking on initial weight entry
     if (!previousData) {
       weightLost = 0;
@@ -61,9 +61,12 @@ $(document).ready(function() {
       date: date,
       lost: weightLost
     }
-    // pushing the currentWeight object into the database
-    database.ref('user/' + userid + '/weightStatus').push(currentWeight);
-    DisplayWeightLost(userid);
+    var user = firebase.auth().currentUser;
+    // pushing the currentWeight object into the database, only if a user is signed in
+    if (user) {
+      database.ref(userid).child('user').child('weight').push(currentWeight);
+    }
+    console.log(user);
     // clears the input values after submit
     $('.weight-input').val('');
     $('#datepicker').val('');
@@ -73,7 +76,7 @@ $(document).ready(function() {
   $('table').on('click','a',function(e){
     e.preventDefault();
     // referring to the database, of 'this' child, targetting the data-key, and removing it
-    database.ref('user/' + userid + '/weightStatus').child($(this).attr('data-key')).remove();
+    database.ref(userid).child('user').child('weight').child($(this).attr('data-key')).remove();
     // removes the deleted element from the screen
     $(this).parents('tr').remove();
     // sends an alert
@@ -87,22 +90,31 @@ $(document).ready(function() {
     var auth = firebase.auth();
     var promise = auth.signInWithEmailAndPassword(email, password);
     promise.catch(e => console.log(e, message));
+    // var testid;
+    // userid = firebase.auth().currentUser.uid;
+    // localStorage.setItem(testid, userid);
+    // var userID = localStorage.getItem(testid);
+    // console.log(userID);
+    firebase.auth().onAuthStateChanged(firebaseUser => {
+      if(firebaseUser) {
+        console.log(firebaseUser);
+        DisplayWeightLost();
+
+      } else {
+        console.log('not logged in');
+      }
+    });
     $('.modalSignin').hide();
     alertModal('welcome-back');
     $('.navbar-right').show();
-    DisplayWeightLost();
+    // DisplayWeightLost();
   });
 
-  $('#registerUser').on('click', events => {
+
+  $('#registerUser').on('click', event = (events) => {
     events.preventDefault();
-    email = $('#email').val().trim();
-    password = $('#password').val().trim();
-    var auth = firebase.auth();
-    var promise = auth.createUserWithEmailAndPassword(email, password);
-    promise.catch(e => console.log(e, message));
     $('.modalSignin').hide();
-    // DisplayWeightLost();
-    alertModal('signed-up');
+    $('.modalRegister').show();
   });
 
   // $('.LogIn').on('click', event => {
@@ -122,10 +134,92 @@ $(document).ready(function() {
     }
   });
 
-  function DisplayWeightLost(userid) {
+  function alertModal(input) {
+    // setting modal to hidden status
+    $('[data-modal-option]').hide();
+    // passes through the input to correctly pick the right modal
+    $('.modal-' + input).show();
+    // shows the correct modal
+    $('#myModal').show();
+    // sets the x button to close the modal, and closes the modal
+    $('#myModal .close').on('click', function() {
+      $('#myModal').hide();
+    })
+  };
+
+  $('#submitRegistration').on('click', function() {
+    var userName = $('#userName').val().trim();
+    var email = $('#signUpEmail').val().trim();
+    var targetWeight = $('#targetWeight').val().trim();
+    var password = $('#password').val().trim();
+    console.log(userName);
+    console.log(email);
+    console.log(targetWeight);
+    console.log(password);
+    // firebase.auth().createUserWithEmailAndPassword(email, password).then(function(user) {
+    //   var user = firebase.auth().currentUser;
+    //   console.log(user);
+    //   saveUser(user); // Optional
+    // }, function(error) {
+    // // Handle Errors here.
+    //   var errorCode = error.code;
+    //   var errorMessage = error.message;
+    // });
+    firebase.auth().createUserWithEmailAndPassword(email, password).then(function(user){
+      console.log('user is authenticated, saving to database now...');
+      // var user = firebase.auth().currentUser;
+      console.log(user);
+      saveUser(user);
+      }, function(error) {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        console.log('warning, error: ' + errorCode + '. ' + errorMessage);
+      });
+
+    // firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+    //  console.log(error.code);
+    //  console.log(error.message);
+    // });
+    //   userid = firebase.auth().currentUser.uid;
+    //   firebase.ref(userid).child('user').set({
+    //     username: userName,
+    //     password: password,
+    //     email: email,
+    //     uid: userid,
+    //     targetWeight: targetWeight
+    //   })
+    // });
+    // userid = firebase.auth().currentUser.uid;
+    // console.log(userid);
+    // var user = {
+    //   email: email,
+    //   password: password,
+    //   uid: userid
+    // }
+    // database.ref('user').update(user);
+    // .child for firebase
+    // localStorage.setitem
+  });
+
+  function saveUser(user){
+    var saveUser = database.ref(user.uid).child('user');
+    var testUser = {
+      username: this.userName,
+      password: this.password,
+      email: this.email,
+      uid: this.uid,
+      targetWeight: this.targetWeight
+    };
+    console.log(testUser);
+    saveUser.push(testUser);
+  };
+
+
+  function DisplayWeightLost() {
+    userid = firebase.auth().currentUser.uid;
     console.log(userid);
     // accessing the database, each time a new element is added, function will automatically run
-    database.ref('user/' + userid + '/weightStatus').on('child_added', function(snapshot) {
+    database.ref(userid).child('user').child('weight').on('child_added', function(snapshot) {
       // sets weightStatus variable to current child added to firebase
       var weightStatus = snapshot.val();
       var key = snapshot.key;
@@ -141,27 +235,4 @@ $(document).ready(function() {
       console.log('read failed: ' + errorObject);
     })
   };
-
-  function alertModal(input) {
-    // setting modal to hidden status
-    $('[data-modal-option]').hide();
-    // passes through the input to correctly pick the right modal
-    $('.modal-' + input).show();
-    // shows the correct modal
-    $('#myModal').show();
-    // sets the x button to close the modal, and closes the modal
-    $('#myModal .close').on('click', function() {
-      $('#myModal').hide();
-    })
-  };
-  // function saveUser() {
-  //   userid = firebase.auth().currentUser.uid;
-  //   console.log(userid);
-  //   var user = {
-  //     email: email,
-  //     password: password,
-  //     uid: userid
-  //   }
-  //   database.ref('user').update(user);
-  // }
 });

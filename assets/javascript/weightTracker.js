@@ -90,24 +90,9 @@ $(document).ready(function() {
     var auth = firebase.auth();
     var promise = auth.signInWithEmailAndPassword(email, password);
     promise.catch(e => console.log(e, message));
-    // var testid;
-    // userid = firebase.auth().currentUser.uid;
-    // localStorage.setItem(testid, userid);
-    // var userID = localStorage.getItem(testid);
-    // console.log(userID);
-    firebase.auth().onAuthStateChanged(firebaseUser => {
-      if(firebaseUser) {
-        console.log(firebaseUser);
-        DisplayWeightLost();
-
-      } else {
-        console.log('not logged in');
-      }
-    });
     $('.modalSignin').hide();
     alertModal('welcome-back');
     $('.navbar-right').show();
-    // DisplayWeightLost();
   });
 
 
@@ -117,10 +102,6 @@ $(document).ready(function() {
     $('.modalRegister').show();
   });
 
-  // $('.LogIn').on('click', event => {
-  //   $('.modalSignin').show();
-  // });
-
   $('.logOut').on('click', function(events) {
     firebase.auth().signOut();
     alertModal('logged-out');
@@ -129,6 +110,7 @@ $(document).ready(function() {
   firebase.auth().onAuthStateChanged(firebaseUser => {
     if(firebaseUser) {
       console.log(firebaseUser);
+      DisplayWeightLost();
     } else {
       console.log('not logged in');
     }
@@ -202,16 +184,16 @@ $(document).ready(function() {
   });
 
   function saveUser(user){
-    var saveUser = database.ref(user.uid).child('user');
-    var testUser = {
+    var userNode = database.ref(user.uid).child('user');
+    var createduser = {
       username: this.userName,
       password: this.password,
       email: this.email,
       uid: this.uid,
       targetWeight: this.targetWeight
     };
-    console.log(testUser);
-    saveUser.push(testUser);
+    console.log(createduser);
+    userNode.push(createduser);
   };
 
 

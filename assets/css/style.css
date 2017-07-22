@@ -31,12 +31,14 @@ td {
 th {
   text-align: center;
 }
+ul {
+  padding-left: 0;
+}
 li {
   position: relative;
   list-style-type: none;
   border-style: double;
   border-color: black;
-  margin: 10px;
   text-align: center;
   background-color: #CC99CC;
   color: black;
@@ -44,10 +46,12 @@ li {
 
 .main-input {
   background-color: #33ECFF;
-  margin-top: 10px;
+  padding-left: 50px;
   margin-bottom: 10px;
   padding-top: 10px;
   padding-bottom: 10px;
+  width: 80%;
+  float: left;
 }
 
 /* The Modal (background) */
@@ -122,7 +126,8 @@ li {
 .container-weight,
  .main-input,
  .navbar,
- .panel-heading {
+ .panel-heading,
+ .side-panel {
   background: -webkit-linear-gradient(left, #944397, #CC99CC, #944397);
   background: -o-linear-gradient(right, #944397, #CC99CC, #944397);
   background: -moz-linear-gradient(right, #944397, #CC99CC, #944397);
@@ -142,6 +147,10 @@ li {
   color: black;
   display: none;
 }
+.navbar-right {
+  margin-right: 1%;
+  margin-top: 1%;
+}
 #submitRegistration {
   margin: 10px;
   background-color: #CC99CC;
@@ -158,7 +167,8 @@ li {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  padding-top: 20px;
+  padding-top: 12%;
+  padding-bottom: 12%;
 }
  .changeTab {
   background: -webkit-linear-gradient(left, #944397, #CC99CC, #944397);
@@ -167,8 +177,10 @@ li {
   background: linear-gradient(to right, #944397, #CC99CC, #944397);
  }
  .sideLi {
-  min-height: 65px;
-  min-width: 80px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
  }
  .navbar-header,
  .brand-image {
@@ -187,4 +199,11 @@ li {
 }
 .panel-title {
   font-size: 20px;
+}
+.side-panel {
+  width: 15%;
+  float: left;
+  min-height: 500px;
+  margin-right: 1%;
+  margin-left: 1%;
 }

@@ -87,10 +87,16 @@ $(document).ready(function() {
     var password = $('#password').val().trim();
     var auth = firebase.auth();
     var promise = auth.signInWithEmailAndPassword(email, password);
-    promise.catch(e => console.log(e, message));
-    $('.modalSignin').hide();
-    alertModal('welcome-back');
-    $('.navbar-right').show();
+    promise.catch(function(error) {
+      console.log(error.code);
+      if (error.code === 'auth/wrong-password') {
+        alertModal('wrong-password');
+        $('.modalSignin').show();
+      } else {
+        $('.modalSignin').hide();
+        alertModal('welcome-back');
+      }
+    });
   });
 
 

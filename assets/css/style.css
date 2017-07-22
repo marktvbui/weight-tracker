@@ -1,6 +1,6 @@
 body {
   font-family: 'Merienda', cursive;
-  background-color: #A9A9A9;
+  background-color: #708090;
   min-width: 100%;
   min-height: 100%;
 }
@@ -149,23 +149,18 @@ li {
   margin-top: 10px;
   margin-left: 10px;
 }
-.foodRecipes {
-  border-style: solid;
-  border-color: grey;
-  margin-top: 10px;
-}
 
 .listContainer {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  padding-top: 23px;
+  padding-top: 20px;
 }
  .changeTab {
-  background: -webkit-linear-gradient(left, #CC99CC, #944397, #CC99CC);
-  background: -o-linear-gradient(right, #CC99CC, #944397, #CC99CC);
-  background: -moz-linear-gradient(right, #CC99CC, #944397, #CC99CC);
-  background: linear-gradient(to right, #CC99CC, #944397, #CC99CC);
+  background: -webkit-linear-gradient(left, #944397, #CC99CC, #944397);
+  background: -o-linear-gradient(right, #944397, #CC99CC, #944397);
+  background: -moz-linear-gradient(right, #944397, #CC99CC, #944397);
+  background: linear-gradient(to right, #944397, #CC99CC, #944397);
  }
  .sideLi {
   min-height: 65px;

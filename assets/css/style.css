@@ -1,6 +1,6 @@
 body {
   font-family: 'Merienda', cursive;
-  background-color: #708090;
+  background-color: #A9A9A9;
   min-width: 100%;
   min-height: 100%;
 }
@@ -137,6 +137,7 @@ li {
 .logOut, .navbar-right {
   font-weight: bolder;
   color: black;
+  display: none;
 }
 #submitRegistration {
   margin: 10px;

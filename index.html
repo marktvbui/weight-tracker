@@ -24,6 +24,7 @@
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
         <img src="./assets/images/scale.jpg" class="brand-image" />
+        <div class="navTitle">Weight Tracker</div>
         <!--<a class="navbar-brand" href=""></a>-->
       </div>
       <ul class="nav navbar-nav navbar-right">
@@ -41,34 +42,42 @@
       </ul>
     </row>
   </sidebar>
+
   <main class="col-md-10">
-    <div class="container main-input">
-      <div id="form">
-        <label for="weight-input">Current Weight</label>
-        <input class="input weight-input" type="text" id="weight-input"><br>
-        <label for="datepicker">Date</label>
-        <input class="input date-input" type="text" id="datepicker"><br>
-        <button type="submit" class="btn btn-group-sm" value="Submit" id="submit-Info">Submit</button>
+    <div class="panel panel-default main-input">
+      <div class="panel-heading">
+        <h3 class="panel-title">Please enter weight & date</h3>
+      </div>
+      <div class="panel-body">
+        <div id="form">
+          <label for="weight-input">Current Weight</label>
+          <input class="input weight-input" type="text" id="weight-input"><br>
+          <label for="datepicker">Date</label>
+          <input class="input date-input" type="text" id="datepicker"><br>
+          <button type="submit" class="btn btn-group-sm" value="Submit" id="submit-Info">Submit</button>
+        </div>
       </div>
     </div>
-    <div class="container container-weight">
-      <div class="row currentWeight">
-        <h3>Weight Lost Status</h3>
+    <div class="panel panel-default main-input container-weight">
+      <div class="panel-heading currentWeight">
+        <h3 class="panel-title">Weight Lost Status</h3>
       </div>
-      <div class="weightTable">
-        <table data-role="table" class="table" id="weight-table">
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Weight</th>
-              <th>Weight Lost</th>
-              <th>Delete</th>
-            </tr>
-          </thead>
-          <tbody id="weight-data">
+      <div class="panel-body">
+        <div class="weightTable">
+          <table data-role="table" class="table" id="weight-table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Weight</th>
+                <th>Weight Lost</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody id="weight-data">
 
-          </tbody>
-        </table>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
     <div id="myModal" class="modal">

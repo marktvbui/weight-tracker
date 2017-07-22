@@ -73,7 +73,8 @@ li {
 /*  display: none;
 */  overflow: auto;
   position: absolute;
-  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
   top: 20%;
   right: 20%;
   left: 20%;
@@ -97,7 +98,8 @@ li {
   border: 1px solid #888;
   width: 80%;
   font-size: 16px;
-  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
   text-align: center;
 }
 

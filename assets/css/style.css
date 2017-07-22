@@ -149,7 +149,7 @@ li {
 }
 .navbar-right {
   margin-right: 1%;
-  margin-top: 1%;
+  margin-top: .65%;
 }
 #submitRegistration {
   margin: 10px;
@@ -157,7 +157,7 @@ li {
 }
 .sideContent {
   background-color: #944397;
-  min-height: 650px;
+  min-height: 65%;
   max-width: 15%;
   margin-top: 10px;
   margin-left: 10px;

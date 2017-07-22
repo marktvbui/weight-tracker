@@ -18,7 +18,7 @@
   <script src="./assets/javascript/weightTracker.js"></script>
 </head>
 
-<body background>
+<body>
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
@@ -32,8 +32,16 @@
     </div>
     <!-- /.container-fluid -->
   </nav>
-
-  <main>
+  <sidebar>
+    <row>
+      <ul class="sideContent col-md-2">
+        <li class="sideLi"><a class="listContainer" href="#">Food Recipes</a></li>
+        <li class="sideLi"><a class="listContainer" href="#">Diet Tips</a></li>
+        <li class="sideLi"><a class="listContainer" href="#">Blog</a></li>
+      </ul>
+    </row>
+  </sidebar>
+  <main class="col-md-10">
     <div class="container main-input">
       <div id="form">
         <label for="weight-input">Current Weight</label>

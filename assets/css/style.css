@@ -13,6 +13,8 @@ label {
 .brand-image {
   max-height: 65px;
   max-width: 65px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 h3 {
   text-align: center;
@@ -29,12 +31,16 @@ td {
 th {
   text-align: center;
 }
-.navbar {
-  background: -webkit-linear-gradient(left, #944397, #CC99CC, #944397);
-  background: -o-linear-gradient(right, #944397, #CC99CC, #944397);
-  background: -moz-linear-gradient(right, #944397, #CC99CC, #944397);
-  background: linear-gradient(to right, #944397, #CC99CC, #944397);
+li {
+  list-style-type: none;
+  border-style: double;
+  border-color: black;
+  margin: 10px;
+  text-align: center;
+  background-color: #CC99CC;
+  color: black;
 }
+
 .main-input {
   background-color: #33ECFF;
   margin-top: 10px;
@@ -72,7 +78,7 @@ th {
   background: -moz-linear-gradient(right, #CC99CC, #944397, #CC99CC);
   background: linear-gradient(to right, #CC99CC, #944397, #CC99CC);
   padding: 30px;
-  border: 1px solid;
+  border: double;
   font-size: 16px;
 }
 .modalRegister {
@@ -111,13 +117,10 @@ th {
 #form {
   text-align: center;
 }
-.main-input {
-  background: -webkit-linear-gradient(left, #944397, #CC99CC, #944397);
-  background: -o-linear-gradient(right, #944397, #CC99CC, #944397);
-  background: -moz-linear-gradient(right, #944397, #CC99CC, #944397);
-  background: linear-gradient(to right, #944397, #CC99CC, #944397);
-}
-.container-weight {
+
+.container-weight,
+ .main-input,
+ .navbar {
   background: -webkit-linear-gradient(left, #944397, #CC99CC, #944397);
   background: -o-linear-gradient(right, #944397, #CC99CC, #944397);
   background: -moz-linear-gradient(right, #944397, #CC99CC, #944397);
@@ -139,3 +142,32 @@ th {
   margin: 10px;
   background-color: #CC99CC;
 }
+.sideContent {
+  background-color: #944397;
+  min-height: 650px;
+  max-width: 15%;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+.foodRecipes {
+  border-style: solid;
+  border-color: grey;
+  margin-top: 10px;
+}
+
+.listContainer {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 23px;
+}
+ .changeTab {
+  background: -webkit-linear-gradient(left, #CC99CC, #944397, #CC99CC);
+  background: -o-linear-gradient(right, #CC99CC, #944397, #CC99CC);
+  background: -moz-linear-gradient(right, #CC99CC, #944397, #CC99CC);
+  background: linear-gradient(to right, #CC99CC, #944397, #CC99CC);
+ }
+ .sideLi {
+  min-height: 65px;
+  min-width: 80px;
+ }

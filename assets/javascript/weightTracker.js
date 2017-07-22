@@ -184,4 +184,13 @@ $(document).ready(function() {
       console.log('read failed: ' + errorObject);
     })
   };
+
+  var changeTab = 'changeTab';
+  $('.sideLi').on('click', function() {
+    console.log('this link clicked');
+    $('.sideLi').removeClass(changeTab);
+    $(this).addClass(changeTab);
+  });
+
 });
+

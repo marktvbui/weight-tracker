@@ -1,6 +1,6 @@
-$(document).ready(function() {
+$(document).ready(() => {
   // Initialize Firebase
-  var config = {
+  const config = {
     apiKey: "AIzaSyAxqm5yO6zVMr4P1nSHbAQrNJstCct6dxA",
     authDomain: "weight-tracker-825bd.firebaseapp.com",
     databaseURL: "https://weight-tracker-825bd.firebaseio.com",
@@ -11,27 +11,27 @@ $(document).ready(function() {
   firebase.initializeApp(config);
 
   // setting varibles
-  var database = firebase.database();
-  var weight = '';
-  var date = '';
-  var weightLost = '';
-  var email = '';
-  var password = '';
-  var userid = '';
+  const database = firebase.database();
+  let weight = '';
+  let date = '';
+  let weightLost = '';
+  const email = '';
+  const password = '';
+  let userid = '';
   // function to display the calendar
-  $(function() {
+  $(() => {
     $('#datepicker').datepicker();
   });
 
   // on click function, retrieving data from input fields
-  $('#submit-Info').on('click', function(event) {
+  $('#submit-Info').on('click', event => {
     // prevents page from refreshing when submit is clicked
     event.preventDefault();
     //setting weight and date variables to what was inputed
     weight = $('.weight-input').val().trim();
     date = $('#datepicker').val().trim();
     // number check, making sure weight was entered as numbers only
-    var numberRegex = /^\d*\.?\d*$/;
+    const numberRegex = /^\d*\.?\d*$/;
     if (!numberRegex.test(weight)) {
       alertModal('number-input');
       return false;
@@ -43,14 +43,14 @@ $(document).ready(function() {
     }
     userid = firebase.auth().currentUser.uid;
     // grabbing the most recent child, comparing previous weight to current weight to get weight lost amount
-    var previousData = database.ref(userid).child('user').child('weight').limitToLast(1);
+    const previousData = database.ref(userid).child('user').child('weight').limitToLast(1);
     // if statement needed to prevent app from breaking on initial weight entry
     if (!previousData) {
       weightLost = 0;
     } else {
       // simple function to grab previous child's weight, to calculate weight lost
-      previousData.on('child_added', function(event) {
-        var previousWeight = event.val();
+      previousData.on('child_added', event => {
+        const previousWeight = event.val();
         weightLost = (previousWeight.weight - weight).toFixed(2);
       })
     };
@@ -60,7 +60,7 @@ $(document).ready(function() {
       date: date,
       lost: weightLost
     }
-    var user = firebase.auth().currentUser;
+    const user = firebase.auth().currentUser;
     // pushing the currentWeight object into the database, only if a user is signed in
     if (user) {
       database.ref(userid).child('user').child('weight').push(currentWeight);
@@ -83,11 +83,11 @@ $(document).ready(function() {
 
   $('#submit-User').on('click', events => {
     events.preventDefault();
-    var email = $('#email').val().trim();
-    var password = $('#password').val().trim();
-    var auth = firebase.auth();
-    var promise = auth.signInWithEmailAndPassword(email, password);
-    promise.catch(function(error) {
+    const email = $('#email').val().trim();
+    const password = $('#password').val().trim();
+    const auth = firebase.auth();
+    const promise = auth.signInWithEmailAndPassword(email, password);
+    promise.catch(error => {
       console.log(error.code);
       if (error.code === 'auth/wrong-password') {
         alertModal('wrong-password');
@@ -106,7 +106,7 @@ $(document).ready(function() {
     $('.modalRegister').show();
   });
 
-  $('.logOut').on('click', function(events) {
+  $('.logOut').on('click', events => {
     firebase.auth().signOut();
     alertModal('logged-out');
   });
@@ -130,22 +130,22 @@ $(document).ready(function() {
     // shows the correct modal
     $('#myModal').show();
     // sets the x button to close the modal, and closes the modal
-    $('#myModal .close').on('click', function() {
+    $('#myModal .close').on('click', () => {
       $('#myModal').hide();
     })
   };
 
-  $('#submitRegistration').on('click', function() {
-    var userName = $('#userName').val().trim();
-    var email = $('#signUpEmail').val().trim();
-    var targetWeight = $('#targetWeight').val().trim();
-    var password = $('#signUpPass').val().trim();
-    firebase.auth().createUserWithEmailAndPassword(email, password).then(function(user){
+  $('#submitRegistration').on('click', () => {
+    const userName = $('#userName').val().trim();
+    const email = $('#signUpEmail').val().trim();
+    const targetWeight = $('#targetWeight').val().trim();
+    const password = $('#signUpPass').val().trim();
+    firebase.auth().createUserWithEmailAndPassword(email, password).then(user => {
       console.log('user is authenticated, saving to database now...');
       saveUser(userName, email, targetWeight, password);
-      }, function(error) {
-        var errorCode = error.code;
-        var errorMessage = error.message;
+      }, error => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
         console.log('warning, error: ' + errorCode + '. ' + errorMessage);
       });
     $('.modalRegister').hide();
@@ -153,9 +153,9 @@ $(document).ready(function() {
   });
 
   function saveUser(userName, email, targetWeight, password){
-    var user = firebase.auth().currentUser;
-    var userNode = database.ref(user.uid).child('user');
-    var createduser = {
+    const user = firebase.auth().currentUser;
+    const userNode = database.ref(user.uid).child('user');
+    const createduser = {
       userName: userName,
       email: email,
       targetWeight: targetWeight,
@@ -169,12 +169,12 @@ $(document).ready(function() {
   function DisplayWeightLost() {
     userid = firebase.auth().currentUser.uid;
     // accessing the database, each time a new element is added, function will automatically run
-    database.ref(userid).child('user').child('weight').on('child_added', function(snapshot) {
+    database.ref(userid).child('user').child('weight').on('child_added', snapshot => {
       // sets weightStatus variable to current child added to firebase
-      var weightStatus = snapshot.val();
-      var key = snapshot.key;
+      const weightStatus = snapshot.val();
+      const key = snapshot.key;
       // setting up table tr, td elements
-      var row = $('<tr>');
+      const row = $('<tr>');
       row.append($('<td>').html(weightStatus.date));
       row.append($('<td>').html(weightStatus.weight));
       row.append($('<td>').html(weightStatus.lost));
@@ -182,12 +182,12 @@ $(document).ready(function() {
       row.append($('<td><a data-key="'+ key + '">&times;</a></td>'));
       // appending row items to the table
       $('#weight-table').append(row);
-    }, function(errorObject) {
+    }, errorObject => {
       console.log('read failed: ' + errorObject);
     })
   };
 
-  var changeTab = 'changeTab';
+  const changeTab = 'changeTab';
   $('.sideLi').on('click', function() {
     console.log('this link clicked');
     $('.sideLi').removeClass(changeTab);
